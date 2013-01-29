@@ -6,10 +6,10 @@
  * configuration file like this:
  * <code>
  *  return array(
- *	    'default' => array(
- *	        'driver' => 'file',
- *	        'cache_dir' => ROOTDIR.'/modules/cache/cache/'
- *	    )
+ *		'default' => array(
+ *			'driver' => 'file',
+ *			'cache_dir' => ROOTDIR.'/modules/cache/cache/'
+ *		)
  *  );
  * </code>
  * By default /modules/cache/cache/ will be used
@@ -19,19 +19,19 @@
 class File_Cache extends Abstract_Cache {
 
 	/**
-     * Path to the cache directory.
-     * @var string
-     * @access protected
-     */
+	 * Path to the cache directory.
+	 * @var string
+	 * @access protected
+	 */
 	protected $_cache_dir;
 	
 	/**
-     * Creates a file cache instance. Will automatically create cache directory if it 
+	 * Creates a file cache instance. Will automatically create cache directory if it 
 	 * is not present yet.
-     * 
+	 * 
 	 * @param  string  $config    Name of the configuration to initialize
-     * @access public 
-     */
+	 * @access public 
+	 */
 	public function __construct($config) {
 		parent::__construct($config);
 		$this->_cache_dir = Config::get("cache.{$config}.cache_dir", ROOTDIR.'/modules/cache/cache/');
@@ -87,12 +87,12 @@ class File_Cache extends Abstract_Cache {
 	}
 	
 	/**
-     * Checks if the cache subfolder is empty.
+	 * Checks if the cache subfolder is empty.
 	 * If so, removes it.
-     * 
+	 * 
 	 * @param  string  $dir  Directory to check
 	 * @access protected If the file is not expired
-     */
+	 */
 	 
 	 protected function check_dir($dir) {
 		if (count(scandir($dir)) == 2)
@@ -100,13 +100,13 @@ class File_Cache extends Abstract_Cache {
 	}
 	
 	/**
-     * Checks if the cache file is expired. 
+	 * Checks if the cache file is expired. 
 	 * If so, removes it.
-     * 
+	 * 
 	 * @param  string  $file  File to check
 	 * @return bool    If the file is not expired
 	 * @access protected 
-     */
+	 */
 	protected function check_file($file) {
 		$fp = fopen($file, 'r');
 		$expires = fgets($fp);
@@ -121,13 +121,13 @@ class File_Cache extends Abstract_Cache {
 	}
 	
 	/**
-     * Turns $key into an associatove array containing
+	 * Turns $key into an associatove array containing
 	 * file directory and the name of the cache file.
-     * 
+	 * 
 	 * @param  string  $key  Name to sanitize
 	 * @return array   Associative array with file directory and name
 	 * @access public 
-     */
+	 */
 	protected function sanitize($key) {
 		$key = md5($key);
 		return array(

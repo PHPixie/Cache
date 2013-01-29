@@ -19,19 +19,19 @@
 class Database_Cache extends Abstract_Cache {
 	
 	/**
-     * Database connection
-     * @var DB   
-     * @access protected
-     */
+	 * Database connection
+	 * @var DB   
+	 * @access protected
+	 */
 	protected $_db;
 	
 	/**
-     * Creates a database cache instance. Will automatically create cache table if it 
+	 * Creates a database cache instance. Will automatically create cache table if it 
 	 * is not present yet.
-     * 
+	 * 
 	 * @param  string  $config    Name of the configuration to initialize
-     * @access public 
-     */
+	 * @access public 
+	 */
 	public function __construct($config) {
 		parent::__construct($config);
 		$this->_db = DB::instance(Config::get("cache.{$config}.connection",'default'));
