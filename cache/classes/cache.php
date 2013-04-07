@@ -7,7 +7,7 @@
  * https://github.com/dracony/PHPixie-Cache
  * 
  * To enable it add 'cache' to modules array in /application/config/core.php.
- * Currently 4 drivers are provided: APC, Database, File and XCache. For information
+ * Currently 4 drivers are provided: APC, Database, File, Memcache and XCache. For information
  * on configuring your cache check out the /config/cache.php config file inside this
  * module.
  * 

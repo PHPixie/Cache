@@ -12,5 +12,11 @@ return array(
 		
 		//Database connection name for 'database' driver
 		'connecton' => 'default'
+		
+		//Memcached host for 'memcache' driver
+		'memcached_host' => '127.0.0.1',
+		
+		//Memcached port for 'memcache' driver
+		'memcached_port' => '11211',
 	)
 );

@@ -6,6 +6,7 @@ Cache support for PHPixie, supported drivers are:
 * Database
 * File
 * Xcache
+* Memcache
 
 To use this module:
 * Put it in your /modules folder
