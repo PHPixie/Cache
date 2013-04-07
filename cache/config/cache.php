@@ -2,7 +2,7 @@
 return array(
 	'default' => array(
 		
-		//Supprted drivers are: apc, database, file, xcache
+		//Supprted drivers are: apc, database, file, xcache and memcache
 		'driver' => 'file',
 		
 		//Default liefetime for cached objects in seconds
