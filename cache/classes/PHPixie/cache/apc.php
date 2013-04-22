@@ -1,9 +1,12 @@
 <?php
+
+namespace PHPixie\Cache;
+
 /**
  * APC cache driver.
  * @package Cache
  */
-class Apc_Cache extends Abstract_Cache {
+class Apc extends Cache {
 
 	protected function _set($key, $value, $lifetime) {
 		apc_store($key, $value, $lifetime);

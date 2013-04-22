@@ -1,16 +1,23 @@
 <?php
+
+namespace PHPixie\Cache;
 /**
  * Abstract driver class that actual drivers extend.
  * Defines the basic functionality that each driver must provide and
  * provides methods that proxy driver calls.
  * @package Cache
  */
-abstract class Abstract_Cache {
+abstract class Cache {
 
+	/**
+	 * Pixie Dependancy Container
+	 * @var \PHPixie\Pixie
+	 */
+	public $pixie;
+	
 	/**
 	 * Default lifetime for current configuration. Defaults to 3600.
 	 * @var int
-	 * @access protected
 	 */
 	protected $_default_lifetime;
 	
@@ -18,10 +25,10 @@ abstract class Abstract_Cache {
 	 * Creates the cache instance.
 	 * 
 	 * @param  string  $config    Name of the configuration to initialize
-	 * @access public 
 	 */
-	public function __construct($config) {
-		$this->_default_lifetime=Config::get("cache.{$config}.default_lifetime",3600);
+	public function __construct($pixie, $config) {
+		$this->pixie = $pixie;
+		$this->_default_lifetime=$pixie->config->get("cache.{$config}.default_lifetime",3600);
 	}
 	
 	/**
@@ -30,9 +37,8 @@ abstract class Abstract_Cache {
 	 * @param  string  $key       Name to store the object under
 	 * @param  mixed   $value     Object to store
 	 * @param  int     $lifetime  Validity time for this object in seconds. 
-	 * 							  Default's to the value specified in config, or to 3600
+	 *                            Default's to the value specified in config, or to 3600
 	 *                            if it was not specified.
-	 * @access public 
 	 */
 	public function set($key, $value, $lifetime = null){
 		if ($lifetime === null)
@@ -59,7 +65,6 @@ abstract class Abstract_Cache {
 	 * Deletes an object from cache
 	 * 
 	 * @param  string  $key       Name of the object to remove
-	 * @access public 
 	 */
 	public function delete($key) {
 		$this->_delete($this->sanitize($key));
@@ -71,7 +76,6 @@ abstract class Abstract_Cache {
 	 * 
 	 * @param  string  $key  Name to sanitize
 	 * @return string  Sanitized name
-	 * @access protected 
 	 */
 	protected function sanitize($key) {
 		return str_replace(array('/', '\\', ' '), '_', $key);
@@ -85,8 +89,6 @@ abstract class Abstract_Cache {
 	 * @param  int     $lifetime  Validity time for this object in seconds. 
 	 * 							  Default's to the value specified in config, or to 3600
 	 *                            if it was not specified.
-	 * @see Abstract_Cache::set()
-	 * @access protected 
 	 */
 	protected abstract function _set($key, $value, $lifetime);
 	
@@ -96,8 +98,6 @@ abstract class Abstract_Cache {
 	 * 
 	 * @param  string  $key       Sanitized name of the object to retrieve
 	 * @return mixed   The requested object or NULL if it is not found.
-	 * @see Abstract_Cache::get()
-	 * @access protected 
 	 */
 	protected abstract function _get($key);
 	
@@ -105,15 +105,13 @@ abstract class Abstract_Cache {
 	 * Driver implementation of the delete() method
 	 * 
 	 * @param  string  $key       Sanitized name of the object to remove
-	 * @see Abstract_Cache::delete()
-	 * @access protected 
 	 */
 	protected abstract function _delete($key);
 	
 	/**
 	 * Clears cache
 	 * 
-	 * @access public 
+	 * @return void
 	 */
 	public abstract function clear();
 	
@@ -121,7 +119,7 @@ abstract class Abstract_Cache {
 	 * Checks and removes expired objects.
 	 * Not required for the driver to implement.
 	 * 
-	 * @access public 
+	 * @return void
 	 */
 	public function garbage_collect(){}
 

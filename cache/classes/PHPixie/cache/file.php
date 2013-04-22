@@ -1,4 +1,7 @@
 <?php
+
+namespace PHPixie\Cache;
+
 /**
  * File cache driver.
  *
@@ -8,15 +11,15 @@
  *  return array(
  *		'default' => array(
  *			'driver' => 'file',
- *			'cache_dir' => ROOTDIR.'/modules/cache/cache/'
+ *			'cache_dir' => '/assets/cache/'
  *		)
  *  );
  * </code>
- * By default /modules/cache/cache/ will be used
+ * By default /assets/cache/ will be used
  *
  * @package Cache
  */
-class File_Cache extends Abstract_Cache {
+class File extends Cache {
 
 	/**
 	 * Path to the cache directory.
@@ -32,9 +35,9 @@ class File_Cache extends Abstract_Cache {
 	 * @param  string  $config    Name of the configuration to initialize
 	 * @access public 
 	 */
-	public function __construct($config) {
-		parent::__construct($config);
-		$this->_cache_dir = Config::get("cache.{$config}.cache_dir", ROOTDIR.'/modules/cache/cache/');
+	public function __construct($pixie, $config) {
+		parent::__construct($pixie, $config);
+		$this->_cache_dir = $pixie->root_dir.$this->pixie->config->get("cache.{$config}.cache_dir", '/assets/cache/');
 	}
 
 	protected function _set($key, $value, $lifetime) {

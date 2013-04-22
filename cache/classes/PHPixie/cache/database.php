@@ -1,4 +1,7 @@
 <?php
+
+namespace PHPixie\Cache;
+
 /**
  * Database cache driver.
  *
@@ -16,7 +19,7 @@
  *
  * @package Cache
  */
-class Database_Cache extends Abstract_Cache {
+class Database extends Cache {
 	
 	/**
 	 * Database connection
@@ -32,9 +35,10 @@ class Database_Cache extends Abstract_Cache {
 	 * @param  string  $config    Name of the configuration to initialize
 	 * @access public 
 	 */
-	public function __construct($config) {
-		parent::__construct($config);
-		$this->_db = DB::instance(Config::get("cache.{$config}.connection",'default'));
+	public function __construct($pixie, $config) {
+		parent::__construct($pixie, $config);
+		$config = $this->pixie->config->get("cache.{$config}.connection", 'default');
+		$this->_db = $this->pixie->db->get($config);
 		$this->_db->execute("CREATE TABLE IF NOT EXISTS cache (
 			name VARCHAR(255) NOT NULL PRIMARY KEY, 
 			value TEXT, 

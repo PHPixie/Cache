@@ -1,9 +1,12 @@
 <?php
+
+namespace PHPixie\Cache;
+
 /**
  * Memcache cache driver.
  * @package Cache
  */
-class Memcache_Cache extends Abstract_Cache {
+class Memcache extends Cache {
 
 	/**
 	 * Memcache instance
@@ -18,13 +21,13 @@ class Memcache_Cache extends Abstract_Cache {
 	 * @param  string  $config    Name of the configuration to initialize
 	 * @access public 
 	 */
-	public function __construct($config) {
-		parent::__construct($config);
+	public function __construct($pixie, $config) {
+		parent::__construct($pixie, $config);
 		$this->_memcache = new Memcache();
 		
 		$connected = $this->_memcache->connect(
-			Config::get("cache.{$config}.memcached_host"), 
-			Config::get("cache.{$config}.memcached_port")
+			$this->pixie->config->get("cache.{$config}.memcached_host"), 
+			$this->pixie->config->get("cache.{$config}.memcached_port")
 		);
 		
 		if (!$connected)

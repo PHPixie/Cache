@@ -1,9 +1,12 @@
 <?php
+
+namespace PHPixie\Cache;
+
 /**
  * XCache cache driver.
  * @package Cache
  */
-class Xcache_Cache extends Abstract_Cache {
+class Xcache extends Cache {
 
 	protected function _set($key, $value, $lifetime) {
 		xcache_set($key, $value, $lifetime);
