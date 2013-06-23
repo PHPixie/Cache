@@ -23,7 +23,7 @@ class Memcache extends Cache {
 	 */
 	public function __construct($pixie, $config) {
 		parent::__construct($pixie, $config);
-		$this->_memcache = new Memcache();
+		$this->_memcache = new \Memcache();
 		
 		$connected = $this->_memcache->connect(
 			$this->pixie->config->get("cache.{$config}.memcached_host"), 
