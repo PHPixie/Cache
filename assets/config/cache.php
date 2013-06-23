@@ -11,7 +11,7 @@ return array(
 		'cache_dir' => ROOTDIR.'/modules/cache/cache/',
 		
 		//Database connection name for 'database' driver
-		'connecton' => 'default'
+		'connecton' => 'default',
 		
 		//Memcached host for 'memcache' driver
 		'memcached_host' => '127.0.0.1',
