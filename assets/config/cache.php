@@ -2,7 +2,7 @@
 return array(
 	'default' => array(
 		
-		//Supprted drivers are: apc, database, file, xcache and memcache
+		//Supported drivers are: apc, database, file, xcache and memcache
 		'driver' => 'file',
 		
 		//Default liefetime for cached objects in seconds
@@ -11,7 +11,7 @@ return array(
 		'cache_dir' => ROOTDIR.'/modules/cache/cache/',
 		
 		//Database connection name for 'database' driver
-		'connecton' => 'default',
+		'connection' => 'default',
 		
 		//Memcached host for 'memcache' driver
 		'memcached_host' => '127.0.0.1',
