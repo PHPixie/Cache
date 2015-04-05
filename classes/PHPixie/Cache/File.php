@@ -37,7 +37,7 @@ class File extends Cache {
 	 */
 	public function __construct($pixie, $config) {
 		parent::__construct($pixie, $config);
-		$this->_cache_dir = $pixie->root_dir.$this->pixie->config->get("cache.{$config}.cache_dir", '/assets/cache/');
+		$this->_cache_dir = $pixie->root_dir.$this->pixie->config->get("cache.{$config}.cache_dir", 'assets/cache');
 	}
 
 	protected function _set($key, $value, $lifetime) {
