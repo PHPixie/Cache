@@ -6,7 +6,9 @@ addons:
     packages:
     - redis-server
     - memcached
-
+services:
+    - redis-server
+    - memcached
 php:
   - 5.4
   - 5.5
