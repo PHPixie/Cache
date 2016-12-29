@@ -1,0 +1,41 @@
+{
+    "name": "phpixie/cache",
+    "description": "Cache library for PHPixie",
+    "keywords": ["cache", "psr-6", "psr-16", "memcached", "redis"],
+    "homepage": "http://phpixie.com",
+    "type": "library",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Roman Tsiupa",
+            "email": "draconyster@gmail.com",
+            "homepage": "http://dracony.org"
+        }
+    ],
+    "require-dev": {
+        "phpixie/test": "~3.0",
+        "phpixie/filesystem": "~3.1",
+        "predis/predis": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "PHPixie\\": "src/PHPixie",
+            "PHPixie\\Tests\\": "tests/PHPixie/Tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        }
+    },
+    "require": {
+        "phpixie/slice": "~3.0",
+        "psr/cache": "^1.0",
+        "psr/simple-cache": "^0.3.0"
+    },
+    "suggest": {
+        "phpixie/filesystem": "Required for file based cache",
+        "ext-memcached": "Required for memcached support",
+        "predis/predis": "Required for redis support"
+    }
+}
