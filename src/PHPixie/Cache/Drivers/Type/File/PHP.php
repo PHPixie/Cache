@@ -21,7 +21,7 @@ class PHP extends File
         }
 
         $contents = var_export($value, true);
-        return "<?php /*$timestamp*/ return $contents;";
+        return "<?php /*$timestamp*/ \n return $contents;";
     }
 
     protected function getExpiryTimestamp($file)
