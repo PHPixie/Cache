@@ -17,7 +17,7 @@ If you are using the PHPixie framework the component is accessible via your buil
 $cache = $builder->components->cache();
 ```
 
-Like all the other PHPixie components you can use it without the framewor, in that case initialize it like so:
+Like all the other PHPixie components you can use it without the framework, in that case initialize it like so:
 
 ```php
 $slice = new \PHPixie\Slice();
@@ -194,7 +194,7 @@ $key = 'article-'.$id;
 $article = $cache->get($key);
 ```
 
-If thise entities are cached in different parts of the application you have to make sure you are always using the same
+If these entities are cached in different parts of the application you have to make sure you are always using the same
 prefix or even abstract this logic into a separate service. PHPixie Cache solves this problem using a prefixed pools that
 proxy requests to the storage automatically prefixing the keys:
 
@@ -209,7 +209,7 @@ $storage ->set('article.'.$article->id, $article->html());
 ```
 
 As you probably guessed such pools also implement the same `PHPixie\Cache\Pool` interface as the storages and can themselves
-be prefixed thus creating a hierarchy. They can be used as define different pools for different entities and also
+be prefixed thus creating a hierarchy. They can be used to define different pools for different entities and also
 make it easy to later switch some of them to actual separate storages if needed. For example you can start out with
 one cache storage and multiple prefixed pools and expand easily when your application grows.
 
@@ -248,13 +248,13 @@ return array(1,2,3);
 The first line contains a comment with the expiry timestamp, which can be checked simply by reading this one line
 ignoring the rest of the file. Also the cache is stored as PHP code which is retrieved using the `include` operator.
 This means that your opcache will cache it and not actually read the file from disk every time it is requested. This
-approached is especially great for usecases with singular writes and frequent reads like configuration cache etc. and
+approach is especially great for usecases with singular writes and frequent reads like configuration cache etc. and
 can actually outperform other storages.
 
 ## Contributing and adding drivers
 
-Since PHPixie social component got soe much help from the community with adding new providers I decided to add a small
-guide to how to contirbute and add your own storage driver to PHPixie Cache.
+Since PHPixie's social component got so much help from the community with adding new providers I decided to add a small
+guide on how to contribute and add your own storage driver to PHPixie Cache.
 
 1. Add a class `PHPixie\Cache\Drivers\Type\YourDriver` extending from `PHPixie\Cache\Drivers\Driver`.
 2. Register it in `PHPixie\Cache\Builder::$driverMap`.
