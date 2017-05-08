@@ -103,6 +103,17 @@ class Memcached extends Driver
     }
 
     /**
+     * Prepare server config, because in app config it could be defined w/o port or weight
+     *
+     * @param array $value
+     * @return array
+     */
+    protected function prepareServerConfig(array $value)
+    {
+        return $value + array(null, 11211, 1);
+    }
+
+    /**
      * Build client
      *
      * @return \Memcached
@@ -112,7 +123,7 @@ class Memcached extends Driver
         $client = new \Memcached();
         $servers = $this->configData->getRequired('servers');
         foreach($servers as $key => $value) {
-            $servers[$key] = $value + array(null, 11211, 1);
+            $servers[$key] = $this->prepareServerConfig($value);
         }
         $client->addServers($servers);
 
