@@ -10,7 +10,9 @@ class Memcached extends Driver
     /** @var \Memcached */
     protected $client;
 
-
+    /**
+     * @inheritdoc
+     */
     public function hasItem($key)
     {
         $client = $this->client();
@@ -18,6 +20,9 @@ class Memcached extends Driver
         return $client->getResultCode() == \Memcached::RES_SUCCESS;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getItems(array $keys = array())
     {
         if(empty($keys)) {
@@ -33,12 +38,18 @@ class Memcached extends Driver
         return $this->buildItems($keys, $data);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function deleteItems(array $keys = array())
     {
         $this->client()->deleteMulti($keys);
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function clear()
     {
         $this->client()->flush();
@@ -65,6 +76,9 @@ class Memcached extends Driver
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getItem($key)
     {
         $client = $this->client();
@@ -88,6 +102,11 @@ class Memcached extends Driver
         return $this->client;
     }
 
+    /**
+     * Build client
+     *
+     * @return \Memcached
+     */
     protected function buildClient()
     {
         $client = new \Memcached();
@@ -96,6 +115,7 @@ class Memcached extends Driver
             $servers[$key] = array(null, 11211, 1) + $value;
         }
         $client->addServers($servers);
+
         return $client;
     }
 }
