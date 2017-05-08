@@ -28,12 +28,25 @@ abstract class Driver
         $this->configData = $configData;
     }
 
+    /**
+     * Delete item
+     *
+     * @param $key
+     * @return bool
+     */
     public function deleteItem($key)
     {
         $this->deleteItems(array($key));
         return true;
     }
 
+    /**
+     * Save multiple items
+     *
+     * @param array(Item) $items
+     * @param array $expiryTimes corresponding expiry times
+     * @return bool
+     */
     public function saveMultiple($items, $expiryTimes)
     {
         /** @var Item $item */
@@ -44,6 +57,13 @@ abstract class Driver
         return true;
     }
 
+    /**
+     * Build Items
+     *
+     * @param array $keys
+     * @param array $data
+     * @return array
+     */
     protected function buildItems($keys, $data)
     {
         $result = array();
@@ -58,11 +78,24 @@ abstract class Driver
         return $result;
     }
 
+    /**
+     * Build Item object
+     *
+     * @param string $key
+     * @param bool $isHit
+     * @param mixed $value stored value
+     * @return Item
+     */
     public function buildItem($key, $isHit, $value = null)
     {
         return new Item($key, $isHit, $value);
     }
 
+    /**
+     * Check if cleanup is required. And perform cleanup(if required)/
+     *
+     * @return void
+     */
     protected function cleanupCheck()
     {
         if($this->cleanupProbability === null) {
@@ -74,10 +107,13 @@ abstract class Driver
         }
     }
 
+    /**
+     * Default cleanup implementation.
+     *
+     * @return void
+     */
     public function cleanup()
-    {
-
-    }
+    {}
 
     /**
      * @param string $key

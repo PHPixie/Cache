@@ -10,7 +10,9 @@ class Memcached extends Driver
     /** @var \Memcached */
     protected $client;
 
-
+    /**
+     * @inheritdoc
+     */
     public function hasItem($key)
     {
         $client = $this->client();
@@ -18,6 +20,9 @@ class Memcached extends Driver
         return $client->getResultCode() == \Memcached::RES_SUCCESS;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getItems(array $keys = array())
     {
         if(empty($keys)) {
@@ -33,12 +38,18 @@ class Memcached extends Driver
         return $this->buildItems($keys, $data);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function deleteItems(array $keys = array())
     {
         $this->client()->deleteMulti($keys);
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function clear()
     {
         $this->client()->flush();
@@ -65,6 +76,9 @@ class Memcached extends Driver
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getItem($key)
     {
         $client = $this->client();
@@ -88,14 +102,31 @@ class Memcached extends Driver
         return $this->client;
     }
 
+    /**
+     * Prepare server config, because in app config it could be defined w/o port or weight
+     *
+     * @param array $value
+     * @return array
+     */
+    protected function prepareServerConfig(array $value)
+    {
+        return $value + array(null, 11211, 1);
+    }
+
+    /**
+     * Build client
+     *
+     * @return \Memcached
+     */
     protected function buildClient()
     {
         $client = new \Memcached();
         $servers = $this->configData->getRequired('servers');
         foreach($servers as $key => $value) {
-            $servers[$key] = array(null, 11211, 1) + $value;
+            $servers[$key] = $this->prepareServerConfig($value);
         }
         $client->addServers($servers);
+
         return $client;
     }
 }

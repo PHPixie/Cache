@@ -19,31 +19,49 @@ class Item implements CacheItemInterface
         $this->expiresAt = $expiresAt;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getKey()
     {
         return $this->key;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function get()
     {
         return $this->value;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function isHit()
     {
         return $this->isHit;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function set($value)
     {
         $this->value = $value;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function expiresAt($expiresAt)
     {
         $this->expiresAt = $expiresAt;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function expiresAfter($interval)
     {
         if($interval === null) {
@@ -59,6 +77,11 @@ class Item implements CacheItemInterface
         $this->expiresAt = $expires->add($interval);
     }
 
+    /**
+     * Get exiration datetime
+     *
+     * @return null|\DateTimeInterface
+     */
     public function getExpiresAt()
     {
         return $this->expiresAt;
