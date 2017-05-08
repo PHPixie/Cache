@@ -112,7 +112,7 @@ class Memcached extends Driver
         $client = new \Memcached();
         $servers = $this->configData->getRequired('servers');
         foreach($servers as $key => $value) {
-            $servers[$key] = array(null, 11211, 1) + $value;
+            $servers[$key] = $value + array(null, 11211, 1);
         }
         $client->addServers($servers);
 
