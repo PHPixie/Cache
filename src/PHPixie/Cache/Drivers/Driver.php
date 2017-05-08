@@ -91,6 +91,11 @@ abstract class Driver
         return new Item($key, $isHit, $value);
     }
 
+    /**
+     * Check if cleanup is required. And perform cleanup(if required)/
+     *
+     * @return void
+     */
     protected function cleanupCheck()
     {
         if($this->cleanupProbability === null) {
