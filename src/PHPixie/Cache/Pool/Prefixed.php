@@ -107,7 +107,7 @@ class Prefixed implements Pool
      */
     public function getItem($key)
     {
-        return $this->convertItem($this->getItem($key), true);
+        return $this->storage->convertItem($this->getItem($key), true);
     }
 
     /**
