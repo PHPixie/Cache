@@ -127,8 +127,12 @@ class Memcached extends Driver
             $client = new \Memcached($persistentId);
         }
 
-        // do not add servers if persistence is turned on
-        if (null !== $persistentId && !count($client->getServerList())) {
+        if (null === $persistentId) {
+            $client->setOptions($this->configData->get('options', array()));
+        } else if (empty($client->getServerList())) {
+            // @see https://php.net/manual/en/memcached.construct.php#106865 - options only once
+            // @see https://php.net/manual/en/memcached.construct.php#93536 - do not add twice
+            $client->setOptions($this->configData->get('options', array()));
             $servers = $this->configData->getRequired('servers');
             foreach ($servers as $key => $value) {
                 $servers[$key] = $this->prepareServerConfig($value);
