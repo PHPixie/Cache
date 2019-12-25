@@ -13,7 +13,7 @@
         }
     ],
     "require-dev": {
-        "phpixie/test": "~3.0",
+        "phpixie/test": "~3.1",
         "phpixie/filesystem": "~3.1",
         "predis/predis": "^1.1"
     },
