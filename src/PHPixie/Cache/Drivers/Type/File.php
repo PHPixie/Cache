@@ -83,7 +83,7 @@ abstract class File extends Driver
     public function clear()
     {
         foreach (scandir($this->directory) as $file) {
-            if($file{0} == '.') {
+            if($file[0] == '.') {
                 continue;
             }
 
@@ -111,7 +111,7 @@ abstract class File extends Driver
         $now = time();
 
         foreach (scandir($this->directory) as $file) {
-            if($file{0} == '.') {
+            if($file[0] == '.') {
                 continue;
             }
 
